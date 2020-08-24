@@ -5,8 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic-Tac-Toe Game</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
-<body>
+<body class="bg-image">
+
+    <div class="container fit-screen ">
+        <div class="row justify-content-center align-items-center fit-screen ">
+            <div class="card mb-3 game-board">
+                <div class="card-body">
+                    <div class="row bottom-border tiles-height">
+                        <div class="col-4 right-border tiles">
+                            <svg class="red-heart" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                            </svg>
+                        </div>
+                        <div class="col-4 col-4 right-border tiles"></div>
+                        <div class="col-4 tiles"></div>
+                    </div>
+                    <div class="row bottom-border tiles-height">
+                        <div class="col-4 col-4 right-border tiles"></div>
+                        <div class="col-4 col-4 right-border tiles">
+                            <svg class="white-cross" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                                <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                            </svg>
+                        </div>
+                        <div class="col-4 tiles"></div>
+                    </div>
+                    <div class="row tiles-height">
+                        <div class="col-4 col-4 right-border tiles"></div>
+                        <div class="col-4 col-4 right-border tiles"></div>
+                        <div class="col-4 tiles"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script src="assets/js/dom_actions.js"></script>
     <script src="assets/js/index.js"></script>
