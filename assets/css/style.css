@@ -56,3 +56,14 @@ div {
     font-size: 20vh;
     color: white;
 }
+
+.hide {
+    display: none !important;
+}
+
+.welcome-box {
+    background: rgba(0, 0, 0, .75) !important;
+    border: 2px solid white !important;
+    color: white;
+    font-size: 18px;
+}
