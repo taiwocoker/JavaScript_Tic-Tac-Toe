@@ -67,3 +67,9 @@ div {
     color: white;
     font-size: 18px;
 }
+
+.congrat {
+    width: 70% !important;
+    height: 200px;
+    align-self: center;
+}

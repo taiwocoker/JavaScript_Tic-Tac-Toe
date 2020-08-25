@@ -1,10 +1,10 @@
 const DomActions = (() => {
 
+    const mainContent = document.querySelector('.main-content');
     const switchContent = () => {
-        const mainContent = document.querySelector('.main-content');
 
         mainContent.innerHTML = `
-            <div class="card mb-3 game-board hide">
+            <div class="card mb-3 game-board">
                 <div class="card-body gameBoard">
                 
                 </div>
@@ -40,12 +40,12 @@ const DomActions = (() => {
         return value;
     }
 
-    const displayColumns = (subarr, limit) => {
+    const displayColumns = (subarr) => {
         let content = '';
         let i = 0;
-        while(i<=limit){
+        while(i < subarr.length){
             content += `
-                <div class="col-4 col-4 right-border tiles">
+                <div class="col-4 right-border tiles" onclick="getTileValue(${displaySign(subarr[i])})">
                     ${displaySign(subarr[i])}
                 </div>  
             `
@@ -76,7 +76,7 @@ const DomActions = (() => {
         while (j < arr.length){
             content += `
                 <div class="row bottom-border tiles-height">
-                    ${displayColumns(arr.slice(i, j+1), j)}
+                    ${displayColumns(arr.slice(i, j+1))}
                 </div>
             `
             i += 3
@@ -86,4 +86,20 @@ const DomActions = (() => {
         gameBoard.innerHTML = content;
 
     }
+
+    const congratMsg = (winner) => {
+        mainContent.innerHTML = `
+        <div class="card p-3 welcome-box">
+            <img src="assets/images/congrats.png" class="card-img-top congrat" alt="...">
+            <div class="card-body">
+            <h2 class="card-title text-center">${winner} won the game!</h2>
+            <p class="card-text text-center">Do you want to play again?</p>
+            </div>
+            <div class="card-body d-flex justify-content-center m-3">
+                <button class="btn btn-danger" id="start-game">Play again</button>
+            </div>
+        </div>
+        `
+    }
+
 })
