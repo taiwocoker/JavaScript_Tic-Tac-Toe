@@ -1,11 +1,15 @@
-import { DomActions } from './dom_actions.js'
+'use strict';
+
+let game = null;
+let current_player = null;
+let prev_player = null;
 
 function Player(name, sign){
-    const choices = [];
+    let choices = [];
     const addChoice = function(choice){
-        this.choices.push(choice);
+        choices.push(choice);
     }
-    return {name, sign, addChoice}
+    return {name, sign, choices, addChoice}
 }
 
 function Board(){
@@ -36,10 +40,21 @@ function Board(){
     }
 
     const winningComb = function(choices){
-        return winningCombinations.includes(choices);
+        let res = false;
+        let i = 0;
+        while (i<winningCombinations.length){
+            let resultArray = winningCombinations[i].filter(n=>!choices.includes(n)) ;
+            if (resultArray.length === 0){
+                console.log('found a winner');
+                res = true;
+                break;
+            }
+            i += 1;
+        }
+        return res;
     }
     
-    return { filledBoard, updateBoard, winningComb }
+    return { positions, filledBoard, updateBoard, winningComb }
 }
 
 function Game(player1, player2) {
@@ -48,25 +63,62 @@ function Game(player1, player2) {
     const board = Board();
 
     const play = function(position, player) {
-        return board.updateBoard(position, player.sign);
+        let updated = false;
+        if (board.updateBoard(position, player.sign) === true ){
+            player.addChoice(position);
+            updated = true;
+        }
+        return updated
     }
 
-    const winner = function() {
+    const checkWinner = function() {
         let winner = false;
-        if (board.winningComb(playerOne.choices)){
+        console.log(board.winningComb(playerOne.choices));
+        if (board.winningComb(playerOne.choices) === true){
             winner = playerOne;
         }
-        if (board.winningComb(playerTwo.choices)){
+        if (board.winningComb(playerTwo.choices) === true){
             winner = playerTwo;
         }
         return winner;
     }
 
     const start = function() {
-        let currentPlayer = playerOne;
-         DomActions.displayBoard(board.positions)
+        current_player = playerOne;
+        prev_player = playerTwo;
+        DomActions.displayBoard(board.positions);
+    }
+
+    return {playerOne, playerTwo, board, play, checkWinner, start}
+}
+
+function startGame() {
+    let players = DomActions.getPlayers();
+    if (players != false){
+        game = new Game(players.playerOne, players.playerTwo);
+        game.start();
+    } else {
+        alert('Please provide your names.');
     }
 }
 
-    DomActions.getPlayers();
+function makeChoice(choice) {
+    let changed = game.play(choice, current_player);
+    if (changed === true){
+        let temp = current_player;
+        current_player = prev_player;
+        prev_player = temp;
+        console.log(game.checkWinner());
+        if(game.checkWinner() !== false){
+            DomActions.congratMsg(game.checkWinner().name);
+        }else{
+            DomActions.displayBoard(game.board.positions);
+        }
+    }else{
+        alert(`${current_player.name} this spot is taken, please choose another one!`);
+    }
+}
 
+function restartGame() {
+    DomActions.restart();
+}

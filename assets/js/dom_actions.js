@@ -1,5 +1,6 @@
-export const DomActions = (() => {
-
+const DomActions = (() => {
+    'use strict';
+    
     const mainContent = document.querySelector('.main-content');
     
     const heartIcon = `
@@ -26,19 +27,14 @@ export const DomActions = (() => {
     }
 
     const getPlayers = () => {
-        let startGame = document.getElementById('start-game');
-        const playerOne = null;
-        const playerTwo = null;
-        startGame.addEventListener('click', function(){
-            const myForm = document.getElementById('players-form');
-            if (myForm.elements.namedItem('player-1').value && myForm.elements.namedItem('player-2').value) {
-                playerOne = myForm.elements.namedItem('player-1').value;
-                playerTwo = myForm.elements.namedItem('player-2').value;
-                switchContent();
-            } else {
-                alert('Please provide your names.');
-            }
-        })
+        let playerOne = null;
+        let playerTwo = null;
+        const myForm = document.getElementById('players-form');
+        if (myForm.elements.namedItem('player-1').value && myForm.elements.namedItem('player-2').value) {
+            playerOne = myForm.elements.namedItem('player-1').value;
+            playerTwo = myForm.elements.namedItem('player-2').value;
+            switchContent();
+        }
 
         return (playerOne!=null && playerTwo!=null) ? {playerOne, playerTwo} : false
     }
@@ -58,7 +54,7 @@ export const DomActions = (() => {
         let i = 0;
         while(i < subarr.length){
             content += `
-                <div class="col-4 right-border tiles" onclick="getTileValue(${displaySign(subarr[i])})">
+                <div class="col-4 right-border tiles" onclick="makeChoice(${ (typeof(subarr[i]) === 'number') ? subarr[i] : '' })">
                     ${displaySign(subarr[i])}
                 </div>  
             `
@@ -99,11 +95,37 @@ export const DomActions = (() => {
             <p class="card-text text-center">Do you want to play again?</p>
             </div>
             <div class="card-body d-flex justify-content-center m-3">
-                <button class="btn btn-danger" id="start-game">Play again</button>
+                <button class="btn btn-danger" onclick="restartGame()">Play again</button>
             </div>
         </div>
         `
     }
-    return {congratMsg, displayBoard, switchContent, getPlayers}
+
+    const restart = () => {
+        mainContent.innerHTML = `
+            <div class="card col-8 welcome-box">
+                <div class="card-header p-3 text-center ">
+                 <h4>Welcome to Tic-Tac-Toe</h4>
+                </div>
+                <div class="card-body p-3" action='#'>
+                    <h5 class="card-title text-center">Please write your names</h5>
+                    <form id="players-form">
+                        <div class="form-group">
+                        <label for="exampleInputEmail1">Player 1</label>
+                        <input type="text" class="form-control" name="player-1">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Player 2</label>
+                            <input type="text" class="form-control" name="player-2">
+                        </div>
+                        <p class="card-text">Please remember the rules of the game</p>
+                        <button type="submit" class="btn btn-danger" id="start-game" onclick="startGame()">Start Game</button>
+                    </form>
+
+                </div>
+            </div>  
+        `
+    }
+    return {congratMsg, displayBoard, switchContent, getPlayers, restart}
 
 })();
