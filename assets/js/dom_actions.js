@@ -1,93 +1,90 @@
+/*
+  eslint-disable no-unused-vars, no-alert, no-undef
+*/
 const DomActions = (() => {
-    'use strict';
-    
-    const mainContent = document.querySelector('.main-content');
-    
-    const heartIcon = `
+  const mainContent = document.querySelector('.main-content');
+
+  const heartIcon = `
             <svg class="red-heart" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
             </svg>
-        `
+        `;
 
-    const crossIcon = `
+  const crossIcon = `
             <svg class="white-cross" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
                 <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
             </svg>
-        `
-    const switchContent = () => {
-
-        mainContent.innerHTML = `
+        `;
+  const switchContent = () => {
+    mainContent.innerHTML = `
             <div class="card mb-3 game-board">
                 <div class="card-body gameBoard">
                 
                 </div>
             </div>
-        `
+        `;
+  };
+
+  const getPlayers = () => {
+    let playerOne = null;
+    let playerTwo = null;
+    const myForm = document.getElementById('players-form');
+    if (myForm.elements.namedItem('player-1').value && myForm.elements.namedItem('player-2').value) {
+      playerOne = myForm.elements.namedItem('player-1').value;
+      playerTwo = myForm.elements.namedItem('player-2').value;
+      switchContent();
     }
 
-    const getPlayers = () => {
-        let playerOne = null;
-        let playerTwo = null;
-        const myForm = document.getElementById('players-form');
-        if (myForm.elements.namedItem('player-1').value && myForm.elements.namedItem('player-2').value) {
-            playerOne = myForm.elements.namedItem('player-1').value;
-            playerTwo = myForm.elements.namedItem('player-2').value;
-            switchContent();
-        }
+    return (playerOne != null && playerTwo != null) ? { playerOne, playerTwo } : false;
+  };
 
-        return (playerOne!=null && playerTwo!=null) ? {playerOne, playerTwo} : false
+  const displaySign = (sign) => {
+    let value = '';
+    if (sign === 'heart') {
+      value = heartIcon;
+    } else if (sign === 'cross') {
+      value = crossIcon;
     }
+    return value;
+  };
 
-    const displaySign = (sign) => {
-        let value = '';
-        if (sign==='heart'){
-            value = heartIcon;
-        }else if (sign==='cross'){
-            value = crossIcon;
-        }
-        return value;
-    }
-
-    const displayColumns = (subarr) => {
-        let content = '';
-        let i = 0;
-        while(i < subarr.length){
-            content += `
-                <div class="col-4 right-border tiles" onclick="makeChoice(${ (typeof(subarr[i]) === 'number') ? subarr[i] : '' })">
+  const displayColumns = (subarr) => {
+    let content = '';
+    let i = 0;
+    while (i < subarr.length) {
+      content += `
+                <div class="col-4 right-border tiles" onclick="makeChoice(${(typeof (subarr[i]) === 'number') ? subarr[i] : ''})">
                     ${displaySign(subarr[i])}
                 </div>  
-            `
-            i = i+1;
-        }
-        return content;
+            `;
+      i += 1;
     }
+    return content;
+  };
 
 
-    const displayBoard = (arr) => {
-        
+  const displayBoard = (arr) => {
+    const gameBoard = document.querySelector('.gameBoard');
 
-        const gameBoard = document.querySelector('.gameBoard');
-
-        let i = 0;
-        let j = 2;
-        let content = '';
-        while (j < arr.length){
-            content += `
+    let i = 0;
+    let j = 2;
+    let content = '';
+    while (j < arr.length) {
+      content += `
                 <div class="row bottom-border tiles-height">
-                    ${displayColumns(arr.slice(i, j+1))}
+                    ${displayColumns(arr.slice(i, j + 1))}
                 </div>
-            `
-            i += 3
-            j += 3
-        }
-
-        gameBoard.innerHTML = content;
-
+            `;
+      i += 3;
+      j += 3;
     }
 
-    const congratMsg = (winner) => {
-        mainContent.innerHTML = `
+    gameBoard.innerHTML = content;
+  };
+
+  const congratMsg = (winner) => {
+    mainContent.innerHTML = `
         <div class="card p-3 welcome-box">
             <img src="assets/images/congrats.png" class="card-img-top congrat" alt="...">
             <div class="card-body">
@@ -98,11 +95,11 @@ const DomActions = (() => {
                 <button class="btn btn-danger" onclick="restartGame()">Play again</button>
             </div>
         </div>
-        `
-    }
+        `;
+  };
 
-    const restart = () => {
-        mainContent.innerHTML = `
+  const restart = () => {
+    mainContent.innerHTML = `
             <div class="card col-8 welcome-box">
                 <div class="card-header p-3 text-center ">
                  <h4>Welcome to Tic-Tac-Toe</h4>
@@ -124,8 +121,9 @@ const DomActions = (() => {
 
                 </div>
             </div>  
-        `
-    }
-    return {congratMsg, displayBoard, switchContent, getPlayers, restart}
-
+        `;
+  };
+  return {
+    congratMsg, displayBoard, switchContent, getPlayers, restart,
+  };
 })();
