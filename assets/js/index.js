@@ -1,3 +1,5 @@
+import { DomActions } from './dom_actions.js'
+
 function Player(name, sign){
     const choices = [];
     const addChoice = function(choice){
@@ -62,11 +64,9 @@ function Game(player1, player2) {
 
     const start = function() {
         let currentPlayer = playerOne;
-        while (board.filledBoard() !== false){
-            choice = DomAction.getChoice();
-        }
+         DomActions.displayBoard(board.positions)
     }
 }
 
-
+    DomActions.getPlayers();
 

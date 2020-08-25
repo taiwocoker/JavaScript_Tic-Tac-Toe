@@ -1,6 +1,19 @@
-const DomActions = (() => {
+export const DomActions = (() => {
 
     const mainContent = document.querySelector('.main-content');
+    
+    const heartIcon = `
+            <svg class="red-heart" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+            </svg>
+        `
+
+    const crossIcon = `
+            <svg class="white-cross" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+            </svg>
+        `
     const switchContent = () => {
 
         mainContent.innerHTML = `
@@ -54,19 +67,9 @@ const DomActions = (() => {
         return content;
     }
 
-    const displayBoard = (arr) => {
-        const heartIcon = `
-            <svg class="red-heart" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-            </svg>
-        `
 
-        const crossIcon = `
-            <svg class="white-cross" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
-                <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
-            </svg>
-        `
+    const displayBoard = (arr) => {
+        
 
         const gameBoard = document.querySelector('.gameBoard');
 
@@ -101,5 +104,6 @@ const DomActions = (() => {
         </div>
         `
     }
+    return {congratMsg, displayBoard, switchContent, getPlayers}
 
-})
+})();
