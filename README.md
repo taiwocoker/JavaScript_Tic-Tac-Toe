@@ -8,7 +8,7 @@
 
 ![screenshot](./app_screenshot.png)
 
- View the app live ![here](https://taiwocoker.github.io/JavaScript_Tic-Tac-Toe/)
+ View the app live [here](https://taiwocoker.github.io/JavaScript_Tic-Tac-Toe/)
  
 ## Built With
 
