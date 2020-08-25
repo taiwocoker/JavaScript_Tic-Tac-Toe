@@ -13,7 +13,7 @@ function Player(name, sign){
 }
 
 function Board(){
-    const positions = [1,2,3,4,5,6,7,8,9];
+    let positions = [1,2,3,4,5,6,7,8,9];
     const winningCombinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
 
     const filledBoard = function(){
@@ -111,7 +111,14 @@ function makeChoice(choice) {
         console.log(game.checkWinner());
         if(game.checkWinner() !== false){
             DomActions.congratMsg(game.checkWinner().name);
-        }else{
+        }else if(game.board.filledBoard() === true){
+            let firstPlayer = game.playerOne.name;
+            let secondPlayer = game.playerTwo.name;
+            game = new Game(firstPlayer, secondPlayer);
+            game.start();
+            alert('There was a draw, Play again!')
+        }
+        else{
             DomActions.displayBoard(game.board.positions);
         }
     }else{
