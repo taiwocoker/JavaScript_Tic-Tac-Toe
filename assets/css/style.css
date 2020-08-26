@@ -1,0 +1,76 @@
+div {
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.bg-image {
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  background-image: url(../images/bg-image.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.fit-screen {
+  height: 100%;
+}
+
+.game-board {
+  width: 90vh;
+  height: 90vh;
+  background: rgba(0, 0, 0, 0.75) !important;
+  border: 2px solid white !important;
+  color: white;
+}
+
+.tiles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tiles-height {
+  height: 30vh;
+}
+
+.bottom-border {
+  border-bottom: 2px solid #fff;
+}
+
+.right-border {
+  border-right: 2px solid #fff;
+}
+
+.tiles:hover {
+  box-shadow: inset 0 0 10px #fff;
+}
+
+.red-heart {
+  font-size: 15vh;
+  color: red;
+}
+
+.white-cross {
+  font-size: 20vh;
+  color: white;
+}
+
+.hide {
+  display: none !important;
+}
+
+.welcome-box {
+  background: rgba(0, 0, 0, 0.75) !important;
+  border: 2px solid white !important;
+  color: white;
+  font-size: 18px;
+}
+
+.congrat {
+  width: 70% !important;
+  height: 200px;
+  align-self: center;
+}
