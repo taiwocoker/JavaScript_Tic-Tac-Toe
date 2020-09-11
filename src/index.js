@@ -13,7 +13,6 @@ const startGame = () => {
   if (players !== false) {
     game = Game(players.playerOne, players.playerTwo);
     game.start();
-    console.log(game.currentPlayer)
     listenTiles();
   } else {
     alert('Please provide your names.');
@@ -21,7 +20,7 @@ const startGame = () => {
 }
 
 function makeChoice(choice) {
-  const changed = game.play(choice, currentPlayer);
+  const changed = game.play(choice, game.currentPlayer);
   if (changed === true) {
     const temp = game.currentPlayer;
     game.currentPlayer = game.prevPlayer;
@@ -34,6 +33,7 @@ function makeChoice(choice) {
       const secondPlayer = game.playerTwo.name;
       game = Game(firstPlayer, secondPlayer);
       game.start();
+      listenTiles();
       alert('There was a draw, Play again!');
     } else {
       domActions.displayBoard(game.board.positions);
@@ -47,7 +47,6 @@ function makeChoice(choice) {
 const listenTiles = () => {
   domActions.getAllTiles().forEach(tile => {
     let data = parseInt(tile.getAttribute('data-tile'));
-    console.log(data+' '+typeof(data))
     tile.addEventListener('click', () => {
       makeChoice(data);
     })

@@ -1,6 +1,6 @@
 const Player = (name, sign) => {
     const choices = [];
-    const addChoice = function (choice) {
+    const addChoice = (choice) => {
       choices.push(choice);
     };
     return {

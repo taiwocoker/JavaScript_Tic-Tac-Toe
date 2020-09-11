@@ -9,8 +9,8 @@ const Game = (player1, player2) => {
     const playerOne = Player(player1, 'heart');
     const playerTwo = Player(player2, 'cross');
     const board = Board();
-    let currentPlayer = null;
-    let prevPlayer = null;
+    const currentPlayer = playerOne;
+    const prevPlayer = playerTwo;
   
     const play = function (position, player) {
       let updated = false;
@@ -33,8 +33,6 @@ const Game = (player1, player2) => {
     };
   
     const start = function () {
-      currentPlayer = playerOne;
-      prevPlayer = playerTwo;
       domActions.displayBoard(board.positions);
     };
   
