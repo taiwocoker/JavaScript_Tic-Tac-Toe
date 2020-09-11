@@ -1,11 +1,14 @@
 /*
   eslint-disable no-unused-vars, no-alert, no-undef
 */
+import DomActions from './dom_actions'
+
 let game = null;
 let currentPlayer = null;
 let prevPlayer = null;
+let domActions = DomActions()
 
-function Player(name, sign) {
+const Player = (name, sign) => {
   const choices = [];
   const addChoice = function (choice) {
     choices.push(choice);
@@ -15,7 +18,7 @@ function Player(name, sign) {
   };
 }
 
-function Board() {
+const Board = () => {
   const positions = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const winningCombinations = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7],
     [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
@@ -62,7 +65,7 @@ function Board() {
   };
 }
 
-function Game(player1, player2) {
+const Game = (player1, player2) => {
   const playerOne = Player(player1, 'heart');
   const playerTwo = Player(player2, 'cross');
   const board = Board();
@@ -90,7 +93,8 @@ function Game(player1, player2) {
   const start = function () {
     currentPlayer = playerOne;
     prevPlayer = playerTwo;
-    DomActions.displayBoard(board.positions);
+    domActions.displayBoard(board.positions);
+    listenTiles();
   };
 
   return {
@@ -98,10 +102,10 @@ function Game(player1, player2) {
   };
 }
 
-function startGame() {
-  const players = DomActions.getPlayers();
+const startGame = () => {
+  const players = domActions.getPlayers();
   if (players !== false) {
-    game = new Game(players.playerOne, players.playerTwo);
+    game = Game(players.playerOne, players.playerTwo);
     game.start();
   } else {
     alert('Please provide your names.');
@@ -115,21 +119,44 @@ function makeChoice(choice) {
     currentPlayer = prevPlayer;
     prevPlayer = temp;
     if (game.checkWinner() !== false) {
-      DomActions.congratMsg(game.checkWinner().name);
+      domActions.congratMsg(game.checkWinner().name);
+      listenRestartGame();
     } else if (game.board.filledBoard() === true) {
       const firstPlayer = game.playerOne.name;
       const secondPlayer = game.playerTwo.name;
-      game = new Game(firstPlayer, secondPlayer);
+      game = Game(firstPlayer, secondPlayer);
       game.start();
       alert('There was a draw, Play again!');
     } else {
-      DomActions.displayBoard(game.board.positions);
+      domActions.displayBoard(game.board.positions);
+      listenTiles();
     }
   } else {
     alert(`${currentPlayer.name} this spot is taken, please choose another one!`);
   }
 }
 
-function restartGame() {
-  DomActions.restart();
+const listenTiles = () => {
+  domActions.getAllTiles().forEach(tile => {
+    let data = parseInt(tile.getAttribute('data-tile'));
+    console.log(data+' '+typeof(data))
+    tile.addEventListener('click', () => {
+      makeChoice(data);
+    })
+  })
 }
+
+const listenRestartGame = () => {
+  domActions.getRestartButton().addEventListener('click', () => {
+    domActions.restart();
+    listenStartGame();
+  });
+}
+
+const listenStartGame = () => {
+  domActions.getStartButton().addEventListener('click', () => {
+    startGame();
+  })
+}
+
+listenStartGame();
