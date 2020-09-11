@@ -1,7 +1,7 @@
 /*
   eslint-disable no-unused-vars, no-alert, no-undef
 */
-const DomActions = (() => {
+const DomActions = () => {
   const mainContent = document.querySelector('.main-content');
 
   const heartIcon = `
@@ -54,7 +54,7 @@ const DomActions = (() => {
     let i = 0;
     while (i < subarr.length) {
       content += `
-                <div class="col-4 right-border tiles" onclick="makeChoice(${(typeof (subarr[i]) === 'number') ? subarr[i] : ''})">
+                <div class="col-4 right-border tiles" data-tile='${(typeof (subarr[i]) === 'number') ? subarr[i] : ''}' id="choice-tile">
                     ${displaySign(subarr[i])}
                 </div>  
             `;
@@ -86,13 +86,13 @@ const DomActions = (() => {
   const congratMsg = (winner) => {
     mainContent.innerHTML = `
         <div class="card p-3 welcome-box">
-            <img src="assets/images/congrats.png" class="card-img-top congrat" alt="...">
+            <img src="images/congrats.png" class="card-img-top congrat" alt="...">
             <div class="card-body">
             <h2 class="card-title text-center">${winner} won the game!</h2>
             <p class="card-text text-center">Do you want to play again?</p>
             </div>
             <div class="card-body d-flex justify-content-center m-3">
-                <button class="btn btn-danger" onclick="restartGame()">Play again</button>
+                <button class="btn btn-danger" id="restart-game">Play again</button>
             </div>
         </div>
         `;
@@ -116,14 +116,30 @@ const DomActions = (() => {
                             <input type="text" class="form-control" name="player-2">
                         </div>
                         <p class="card-text">Please remember the rules of the game</p>
-                        <button type="submit" class="btn btn-danger" id="start-game" onclick="startGame()">Start Game</button>
+                        <button type="submit" class="btn btn-danger" id="start-game" >Start Game</button>
                     </form>
 
                 </div>
             </div>  
         `;
   };
+
+  const getStartButton = () => document.getElementById('start-game');
+
+  const getAllTiles = () => document.querySelectorAll('#choice-tile');
+
+  const getRestartButton = () => document.getElementById('restart-game');
+
   return {
-    congratMsg, displayBoard, switchContent, getPlayers, restart,
+    congratMsg,
+    displayBoard,
+    switchContent,
+    getPlayers,
+    restart,
+    getStartButton,
+    getAllTiles,
+    getRestartButton,
   };
-})();
+};
+
+export default DomActions;

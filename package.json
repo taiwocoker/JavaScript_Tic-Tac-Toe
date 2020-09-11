@@ -1,0 +1,30 @@
+{
+  "name": "javascript-tic-tac-toe",
+  "version": "1.0.0",
+  "description": "> This is part of the Tic-Tac-Toe Project in [The Odin Project's](https://www.theodinproject.com/courses/javascript/lessons/tic-tac-toe-javascript?ref=lnav) Javascript Curriculum.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taiwocoker/JavaScript_Tic-Tac-Toe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taiwocoker/JavaScript_Tic-Tac-Toe/issues"
+  },
+  "homepage": "https://github.com/taiwocoker/JavaScript_Tic-Tac-Toe#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0",
+    "jest": "^26.4.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
