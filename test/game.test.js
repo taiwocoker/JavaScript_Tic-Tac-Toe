@@ -1,4 +1,4 @@
-import Game from '../src/game'
+import Game from '../src/game';
 
 const game = Game('Taiwo', 'Patricia');
 
@@ -16,13 +16,13 @@ game.play(3, game.playerTwo);
 game.play(5, game.playerTwo);
 
 test('play should return false', () => {
-    expect(game.play(1, game.playerOne)).not.toBeTruthy();
+  expect(game.play(1, game.playerOne)).not.toBeTruthy();
 });
 
 test('checkWinner should return player Patricia', () => {
-    expect(game.checkWinner().name).toBe('Patricia');
+  expect(game.checkWinner().name).toBe('Patricia');
 });
 
 test('checkWinner should return false in game2', () => {
-    expect(game2.checkWinner()).toBeFalsy();
+  expect(game2.checkWinner()).toBeFalsy();
 });

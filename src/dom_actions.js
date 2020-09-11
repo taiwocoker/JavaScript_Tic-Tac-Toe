@@ -124,20 +124,21 @@ const DomActions = () => {
         `;
   };
 
-  const getStartButton = () => {
-    return document.getElementById('start-game');
-  }
+  const getStartButton = () => document.getElementById('start-game');
 
-  const getAllTiles = () => {
-    return document.querySelectorAll('#choice-tile')
-  }
+  const getAllTiles = () => document.querySelectorAll('#choice-tile');
 
-  const getRestartButton = () => {
-    return document.getElementById('restart-game')
-  }
+  const getRestartButton = () => document.getElementById('restart-game');
 
   return {
-    congratMsg, displayBoard, switchContent, getPlayers, restart, getStartButton, getAllTiles, getRestartButton
+    congratMsg,
+    displayBoard,
+    switchContent,
+    getPlayers,
+    restart,
+    getStartButton,
+    getAllTiles,
+    getRestartButton,
   };
 };
 

@@ -1,12 +1,21 @@
 /*
-  eslint-disable no-unused-vars, no-alert, no-undef
+  eslint-disable  no-alert, no-undef, no-use-before-define
 */
-import DomActions from './dom_actions'
+import DomActions from './dom_actions';
 
-import Game from './game'
+import Game from './game';
 
 let game = null;
-let domActions = DomActions()
+const domActions = DomActions();
+
+const listenTiles = () => {
+  domActions.getAllTiles().forEach(tile => {
+    const data = parseInt(tile.getAttribute('data-tile'), 10);
+    tile.addEventListener('click', () => {
+      makeChoice(data);
+    });
+  });
+};
 
 const startGame = () => {
   const players = domActions.getPlayers();
@@ -17,7 +26,21 @@ const startGame = () => {
   } else {
     alert('Please provide your names.');
   }
-}
+};
+
+const listenStartGame = () => {
+  domActions.getStartButton().addEventListener('click', () => {
+    startGame();
+  });
+};
+
+const listenRestartGame = () => {
+  domActions.getRestartButton().addEventListener('click', () => {
+    domActions.restart();
+    listenStartGame();
+  });
+};
+
 
 function makeChoice(choice) {
   const changed = game.play(choice, game.currentPlayer);
@@ -44,26 +67,5 @@ function makeChoice(choice) {
   }
 }
 
-const listenTiles = () => {
-  domActions.getAllTiles().forEach(tile => {
-    let data = parseInt(tile.getAttribute('data-tile'));
-    tile.addEventListener('click', () => {
-      makeChoice(data);
-    })
-  })
-}
-
-const listenRestartGame = () => {
-  domActions.getRestartButton().addEventListener('click', () => {
-    domActions.restart();
-    listenStartGame();
-  });
-}
-
-const listenStartGame = () => {
-  domActions.getStartButton().addEventListener('click', () => {
-    startGame();
-  })
-}
 
 listenStartGame();

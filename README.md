@@ -25,15 +25,23 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 - Get a browser like Chrome and Firefox in their most recent versions
+- Get node and npm
 
 ### Setup
 
 - Clone the repository on your local machine
 - cd into the folder
+- run `npm install` to get all the dependencies
 
 ### Install
 
 - Install VSCode or any code editor you like
+- install latest version of npm
+
+### Testing
+
+- to run all the test cases, just type `npm run test`
+
 
 
 ## Authors
